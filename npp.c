@@ -141,14 +141,14 @@ static void		bias_compensation(int16_t biased_spect[],
 								  int16_t bias_shift[],
 								  int16_t biased_spect_sub[],
 								  int16_t bias_sub_shift[]);
-static int16_t	noise_slope();
+static int16_t	noise_slope(void);
 static int16_t	comp_data_shift(int16_t num1, int16_t shift1,
 									int16_t num2, int16_t shift2);
 static void		min_search(int16_t biased_spect[], int16_t bias_shift[],
 						   int16_t biased_spect_sub[],
 						   int16_t bias_sub_shift[]);
-void			enh_init();
-static void		minstat_init();
+void			enh_init(void);
+static void		minstat_init(void);
 static void		process_frame(int16_t inspeech[], int16_t outspeech[]);
 static void		gain_mod(int16_t qk[], int16_t GainD[], int16_t m);
 
@@ -516,7 +516,7 @@ static void		smoothed_periodogram(int16_t YY_av, int16_t yy_shift)
 	int16_t	smoothed_av, alphacorr_new, alpha_N_min_1, alpha_num;
 	int16_t	smav_shift, shift, temp, temp1, tmpns, tmpalpha;
 	int16_t	noise__shift, temp_shift, tmpns_shift, max_shift;
-	int32_t	L_sum, L_max, L_tmp;
+	int32_t	L_sum, L_tmp;
 
 
 	/* ---- compute smoothed_av ---- */
@@ -606,7 +606,6 @@ static void		smoothed_periodogram(int16_t YY_av, int16_t yy_shift)
 	alpha_num = mult(ALPHA_N_MAX, alphacorr);
 
 	/* -- compute smoothed spectrum -- */
-	L_max = 0;
 	for (i = 0; i < ENH_VEC_LENF; i++){
 		tmpns = noisespect[i];
 

@@ -87,10 +87,7 @@ void transcode_up()
 {
 	register int16_t	frame;
 	int16_t	lpc[LPC_ORD + 1], weights[LPC_ORD];
-	int16_t	num_frames;
 
-
-	num_frames = NF;
 
 	/* Read and decode channel input buffer. */
 	low_rate_chn_read(&quant_par, &melp_par[0], &prev_par);

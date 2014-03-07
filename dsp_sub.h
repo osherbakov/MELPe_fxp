@@ -36,6 +36,7 @@ Secretariat fax: +33 493 65 47 16.
 
 
 #include <stdio.h>
+#include "sc1200.h"
 
 void	envelope(int16_t input[], int16_t prev_in, int16_t output[],
 				 int16_t npts);
@@ -63,7 +64,7 @@ void quant_u_dec(int16_t index, int16_t *p_data, int16_t qmin,
 
 void	rand_num(int16_t output[], int16_t amplitude, int16_t npts);
 
-int16_t rand_minstdgen();
+int16_t rand_minstdgen(void);
 
 int16_t	readbl(int16_t input[], FILE *fp_in, int16_t size);
 

@@ -19,15 +19,19 @@
 #ifndef  _SC1200_H_
 #define  _SC1200_H_
 
+#define ARM_MATH_CM4
+#define __FPU_PRESENT 1
+
+#include <arm_math.h>
 
 /* =================== */
 /* Definition of Types */
 /* =================== */
 
-typedef long int		int32_t;				/* 32 bit "accumulator" (L_*) */
-typedef short int		int16_t;				/* 16 bit "register" (sw*) */
-typedef unsigned short	uint16_t;				/* 16 bit unsigned data */
-typedef unsigned long	uint32_t;				/* 32 bit unsigned data */
+// typedef long int		int32_t;				/* 32 bit "accumulator" (L_*) */
+// typedef short int		int16_t;				/* 16 bit "register" (sw*) */
+// typedef unsigned short	uint16_t;				/* 16 bit unsigned data */
+// typedef unsigned long	uint32_t;				/* 32 bit unsigned data */
 typedef double			Word40;					/* 40 bit "accumulator"	*/					
 /* ================== */
 /* General Definition */
@@ -272,9 +276,9 @@ void	sc_ana(struct melp_param *par);
 
 void	synthesis(struct melp_param *par, int16_t sp_out[]);
 
-void	melp_ana_init();
+void	melp_ana_init(void);
 
-void	melp_syn_init();
+void	melp_syn_init(void);
 
 void	melp_chn_write(struct quant_param *qpar, unsigned char chbuf[]);
 

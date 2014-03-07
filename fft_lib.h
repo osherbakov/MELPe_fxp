@@ -23,7 +23,7 @@ int16_t	cfft(int16_t datam1[], int16_t nn);
 /* Radix-2, DIT, 256-point Complex FFT */
 int16_t	fft_npp(int16_t data[], int16_t dir);
 
-void	fs_init();
+void	fs_init(void);
 
 
 #endif

@@ -16,8 +16,8 @@
 #define _TRANSCODE_H_
 
 
-void	transcode_down();
-void	transcode_up();
+void	transcode_down(void);
+void	transcode_up(void);
 
 
 #endif

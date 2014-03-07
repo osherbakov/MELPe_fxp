@@ -84,6 +84,7 @@ Secretariat fax: +33 493 65 47 16.
 
 int16_t *v_add(int16_t vec1[], const int16_t vec2[], int16_t n)
 {
+
 	register int16_t	i;
 
 

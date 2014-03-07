@@ -75,7 +75,7 @@ extern void rewind(FILE *stream);
 /* Debugging Modes */
 /* =============== */
 
-void inc_saturation();
+void inc_saturation(void);
 #if OVERFLOW_CHECK
 #define save_saturation()		temp_saturation = saturation
 #define restore_saturation()	saturation = temp_saturation
