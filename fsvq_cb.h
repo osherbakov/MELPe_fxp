@@ -34,7 +34,7 @@ Secretariat fax: +33 493 65 47 16.
 #define _FSVQ_CB_H_
 
 
-extern const Shortword	fsvq_cb[];
+extern const int16_t	fsvq_cb[];
 
 
 #endif

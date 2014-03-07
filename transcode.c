@@ -41,13 +41,13 @@
 
 // Variables
 static struct melp_param	prev_par;
-static Shortword top_lpc[LPC_ORD];
+static int16_t top_lpc[LPC_ORD];
 
 
 void transcode_down()
 {
-	register Shortword	i;
-	Shortword	num_frames;
+	register int16_t	i;
+	int16_t	num_frames;
 
 
 	num_frames = NF;
@@ -85,9 +85,9 @@ void transcode_down()
 
 void transcode_up()
 {
-	register Shortword	frame;
-	Shortword	lpc[LPC_ORD + 1], weights[LPC_ORD];
-	Shortword	num_frames;
+	register int16_t	frame;
+	int16_t	lpc[LPC_ORD + 1], weights[LPC_ORD];
+	int16_t	num_frames;
 
 
 	num_frames = NF;

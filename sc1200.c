@@ -37,8 +37,8 @@
 
 /* ====== External memory ====== */
 
-Shortword	mode;
-Shortword   chwordsize;
+int16_t	mode;
+int16_t   chwordsize;
 
 /* ========== Static definations ========== */
 
@@ -71,9 +71,9 @@ static void		printHelpMessage(char *argv[]);
 *****************************************************************************/
 int main(int argc, char *argv[])
 {
-	Longword	length;
-	Shortword	speech_in[BLOCK], speech_out[BLOCK];
-	Shortword	bitBufSize, bitBufSize12, bitBufSize24;
+	int32_t	length;
+	int16_t	speech_in[BLOCK], speech_out[BLOCK];
+	int16_t	bitBufSize, bitBufSize12, bitBufSize24;
                                           /* size of the bitstream buffer */
 	BOOLEAN		eof_reached = FALSE;
 	FILE	*fp_in, *fp_out;
@@ -93,9 +93,9 @@ int main(int argc, char *argv[])
 
 	/* ====== Initialize MELP analysis and synthesis ====== */
 	if (rate == RATE2400)
-		frameSize = (Shortword) FRAME;
+		frameSize = (int16_t) FRAME;
 	else
-		frameSize = (Shortword) BLOCK;
+		frameSize = (int16_t) BLOCK;
 	/* Computing bit=Num = rate * frameSize / FSAMP.  Note that bitNum        */
 	/* computes the number of bytes written to the channel and it has to be   */
 	/* exact.  We first carry out the division and then have the multiplica-  */
@@ -205,7 +205,7 @@ int main(int argc, char *argv[])
 				/* read input speech */
 				length = readbl(speech_in, fp_in, frameSize);
 				if (length < frameSize){
-					v_zap(&speech_in[length], (Shortword) (FRAME - length));
+					v_zap(&speech_in[length], (int16_t) (FRAME - length));
 					eof_reached = TRUE;
 				}
 
@@ -289,7 +289,7 @@ int main(int argc, char *argv[])
 *****************************************************************************/
 static void		parseCommandLine(int argc, char *argv[])
 {
-	register Shortword	i;
+	register int16_t	i;
 	BOOLEAN		error_flag = FALSE;
 
 	if (argc < 2)
