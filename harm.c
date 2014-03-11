@@ -142,15 +142,15 @@ static void realIDFT(int16_t mag[], int16_t phase[], int16_t signal[],
 ** Return value:			None
 **
 *****************************************************************************/
+const int16_t		syn_bp_map[16] = {                              /* Q0 */
+	 500,  500,  500,  500,  500,  500,  500, 4000,
+	1000, 1000, 1000, 4000, 2000, 3000, 3000, 4000
+};
 
 void set_fc(int16_t bpvc[], int16_t *fc)
 {
 	register int16_t	i;
 	int16_t	index;
-	const int16_t		syn_bp_map[16] = {                              /* Q0 */
-		 500,  500,  500,  500,  500,  500,  500, 4000,
-		1000, 1000, 1000, 4000, 2000, 3000, 3000, 4000
-	};
 
 	/* ====== Generate voicing information ====== */
 	if (bpvc[0] < X05_Q14){                        /* ---- Pure unvoiced ---- */
