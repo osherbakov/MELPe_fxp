@@ -37,11 +37,12 @@ Secretariat fax: +33 493 65 47 16.
 #ifndef _MAT_LIB_H_
 #define _MAT_LIB_H_
 
-#define ARM_MATH_CM4
-#define __FPU_PRESENT 1
+#ifdef __arm__
+	#define ARM_MATH_CM4
+	#define __FPU_PRESENT 1
 
-#include <arm_math.h>
-
+	#include <arm_math.h>
+#endif
 
 int16_t	*v_add(int16_t vec1[], const int16_t vec2[], int16_t n);
 

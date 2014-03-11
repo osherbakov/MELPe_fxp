@@ -48,12 +48,21 @@ int16_t   chwordsize;
 
 /* ========== Static Variables ========== */
 
-char in_name[100], out_name[100];
+char in_name[256], out_name[256];
 
 /* ========== Local Private Prototypes ========== */
 
 static void		parseCommandLine(int argc, char *argv[]);
 static void		printHelpMessage(char *argv[]);
+
+static char *cmd_line[] = {"melpe", "-i", "test_in.raw", "-o", "test_out.raw", 0};
+
+extern int main_cmd(int argc, char *argv[]);
+int main()
+{
+	main_cmd(5, cmd_line);
+}
+
 
 /****************************************************************************
 **
@@ -69,7 +78,7 @@ static void		printHelpMessage(char *argv[]);
 ** Return value:    None
 **
 *****************************************************************************/
-int main(int argc, char *argv[])
+int main_cmd(int argc, char *argv[])
 {
 	int32_t	length;
 	int16_t	speech_in[BLOCK], speech_out[BLOCK];
@@ -83,11 +92,11 @@ int main(int argc, char *argv[])
 
 	/* ====== Open input, output, and parameter files ====== */
 	if ((fp_in = fopen(in_name,"rb")) == NULL){
-		fprintf(stderr, "  ERROR: cannot read file %s.\n", in_name);
+		printf("  ERROR: cannot read file %s.\n", in_name);
 		exit(1);
 	}
 	if ((fp_out = fopen(out_name,"wb")) == NULL){
-		fprintf(stderr, "  ERROR: cannot write file %s.\n", out_name);
+		printf("  ERROR: cannot write file %s.\n", out_name);
 		exit(1);
 	}
 
@@ -110,7 +119,7 @@ int main(int argc, char *argv[])
         bitBufSize12 = 14;
         bitBufSize24 = 9;
     }else{
-        fprintf(stderr,"Channel word size is wrong!\n");
+        printf("Channel word size is wrong!\n");
         exit(-1);
     }
 
@@ -133,7 +142,7 @@ int main(int argc, char *argv[])
 	frame_count = 0;
 	eof_reached = FALSE;
 	while (!eof_reached){
-		fprintf(stderr, "Frame = %ld\r", frame_count);
+		printf("Frame = %ld\r", frame_count);
 
 		if (mode == DOWN_TRANS){
 			/* --- Read 2.4 channel input --- */
@@ -267,7 +276,7 @@ int main(int argc, char *argv[])
 
 	fclose(fp_in);
 	fclose(fp_out);
-	fprintf(stderr, "\n\n");
+	printf("\n\n");
 
 	return(0);
 }
@@ -298,7 +307,7 @@ static void		parseCommandLine(int argc, char *argv[])
 	/* Setting default values. */
 	mode = ANA_SYN;
 	rate = RATE2400;
-    chwordsize = 8;         // this is for packed bitstream
+  chwordsize = 8;         // this is for packed bitstream
 	in_name[0] = '\0';
 	out_name[0] = '\0';
 
@@ -344,33 +353,33 @@ static void		parseCommandLine(int argc, char *argv[])
 		exit(1);
 	}
 
-	fprintf(stderr, "\n\n\t%s %s, %s\n\n", PROGRAM_NAME, PROGRAM_VERSION,
+	printf("\n\n\t%s %s, %s\n\n", PROGRAM_NAME, PROGRAM_VERSION,
 			PROGRAM_DATE);
 	switch (mode){
 	case ANA_SYN:
 	case ANALYSIS:
 	case SYNTHESIS:
 		if (rate == RATE2400)
-			fprintf(stderr, " ---- 2.4kbps mode.\n");
+			printf(" ---- 2.4kbps mode.\n");
 		else
-			fprintf(stderr, " ---- 1.2kbps mode.\n");
+			printf(" ---- 1.2kbps mode.\n");
 		break;
 	}
 	switch (mode){
 	case ANA_SYN:
-		fprintf(stderr, " ---- Analysis and Synthesis.\n"); break;
+		printf(" ---- Analysis and Synthesis.\n"); break;
 	case ANALYSIS:
-		fprintf(stderr, " ---- Analysis only.\n"); break;
+		printf(" ---- Analysis only.\n"); break;
 	case SYNTHESIS:
-		fprintf(stderr, " ---- Synthesis only.\n"); break;
+		printf(" ---- Synthesis only.\n"); break;
 	case UP_TRANS:
-		fprintf(stderr, " ---- Transcoding from 1.2kbps to 2.4kbps.\n"); break;
+		printf(" ---- Transcoding from 1.2kbps to 2.4kbps.\n"); break;
 	case DOWN_TRANS:
-		fprintf(stderr, " ---- Transcoding from 2.4kbps to 1.2kbps.\n"); break;
+		printf(" ---- Transcoding from 2.4kbps to 1.2kbps.\n"); break;
 	}
 
-	fprintf(stderr, " ---- input from %s.\n", in_name);
-	fprintf(stderr, " ---- output to %s.\n", out_name);
+	printf( " ---- input from %s.\n", in_name);
+	printf( " ---- output to %s.\n", out_name);
 }
 
 
@@ -387,15 +396,15 @@ static void		parseCommandLine(int argc, char *argv[])
 *****************************************************************************/
 static void		printHelpMessage(char *argv[])
 {
-	fprintf(stderr, "\n\n\t%s %s, %s\n\n", PROGRAM_NAME, PROGRAM_VERSION,
+	printf("\n\n\t%s %s, %s\n\n", PROGRAM_NAME, PROGRAM_VERSION,
 			PROGRAM_DATE);
-	fprintf(stdout, "Usage:\n");
-	fprintf(stdout, "\t%s [-l] [-asudp] -i infile -o outfile\n", argv[0]);
-	fprintf(stdout, "\t\tdefault: Analysis/Synthesis at 2.4kbps\n");
-	fprintf(stdout, "\t\t-a --analysis\tAnalysis only\n");
-	fprintf(stdout, "\t\t-s --synthesis\tSynthesis only\n");
-	fprintf(stdout, "\t\t-l --low rate\t1.2kbps coding\n\n");
-	fprintf(stdout, "\t\t-u --transcoder from 1.2kbps to 2.4kpbs\n");
-	fprintf(stdout, "\t\t-d --transcoder from 2.4kbps to 1.2kbps\n");
-    fprintf(stdout, "\t\t-p --using unpacked bitstream for backward compatibility\n\n");
+	printf("Usage:\n");
+	printf("\t%s [-l] [-asudp] -i infile -o outfile\n", argv[0]);
+	printf("\t\tdefault: Analysis/Synthesis at 2.4kbps\n");
+	printf("\t\t-a --analysis\tAnalysis only\n");
+	printf("\t\t-s --synthesis\tSynthesis only\n");
+	printf("\t\t-l --low rate\t1.2kbps coding\n\n");
+	printf("\t\t-u --transcoder from 1.2kbps to 2.4kpbs\n");
+	printf("\t\t-d --transcoder from 2.4kbps to 1.2kbps\n");
+  printf("\t\t-p --using unpacked bitstream for backward compatibility\n\n");
 }

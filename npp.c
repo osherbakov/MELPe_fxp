@@ -887,12 +887,12 @@ static void		min_search(int16_t biased_spect[], int16_t bias_shift[],
 						   int16_t bias_sub_shift[])
 {
 	register int16_t	i, k;
-	static BOOLEAN	localflag[ENH_VEC_LENF];       /* local minimum indicator */
+	static int16_t	localflag[ENH_VEC_LENF];       /* local minimum indicator */
 	static int16_t	minspec_counter = 0;             /* count sub-windows */
 	static int16_t	circb_index = 0;               /* ring buffer counter */
 	static int16_t	circb_min[ENH_VEC_LENF];
                                                 /* minimum of circular buffer */
-    static int16_t	circb_min_shift[ENH_VEC_LENF];
+  static int16_t	circb_min_shift[ENH_VEC_LENF];
 	int16_t	noise_slope_max, tmp, tmp_shift, temp1, temp2;
 	int32_t	L_sum;
 

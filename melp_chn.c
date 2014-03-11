@@ -72,7 +72,7 @@ Secretariat fax: +33 493 65 47 16.
 
 #define ORIGINAL_BIT_ORDER	0    /* flag to use bit order of original version */
 #if (ORIGINAL_BIT_ORDER)                             /* Original linear order */
-static int16_t	bit_order[NUM_CH_BITS] = {
+static const int16_t	bit_order[NUM_CH_BITS] = {
 	 0,	 1,	 2,	 3,	 4,	 5,
 	 6,	 7,	 8,	 9,	10, 11,
 	12, 13, 14, 15, 16, 17,
@@ -84,7 +84,7 @@ static int16_t	bit_order[NUM_CH_BITS] = {
 	48, 49, 50, 51, 52, 53
 };
 #else                                      /* Order based on priority of bits */
-static int16_t	bit_order[NUM_CH_BITS] = {
+static const int16_t	bit_order[NUM_CH_BITS] = {
 	 0,	17,  9,	28, 34,  3,
 	 4,	39,  1,	 2,	13, 38,
 	14, 10, 11, 40, 15, 21,
@@ -442,10 +442,10 @@ void low_rate_chn_write(struct quant_param *qpar)
 ** Return value:	None
 **
 *****************************************************************************/
-int16_t low_rate_chn_read(struct quant_param *qpar, struct melp_param *par,
+BOOLEAN low_rate_chn_read(struct quant_param *qpar, struct melp_param *par,
 							struct melp_param *prev_par)
 {
-	register int16_t	i, j, k;
+  int16_t	i, j, k;
 	static int16_t	prev_uv = 1;
     static int16_t	prev_fsmag[NUM_HARM];
     static int16_t	qplsp[LPC_ORD], prev_gain[2*NF*NUM_GAINFR];

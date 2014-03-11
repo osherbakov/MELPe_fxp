@@ -30,12 +30,15 @@ Secretariat fax: +33 493 65 47 16.
 #ifndef _MATHHALF_H_
 #define _MATHHALF_H_
 
+#ifdef __arm__
+
 #define ARM_MATH_CM4
 #define __FPU_PRESENT 1
 
 #include <arm_math.h>
 
 #include <dspfns.h>
+#endif
 
 /* addition */
 int16_t	add(int16_t var1, int16_t var2);                     /* 1 ops */
@@ -107,8 +110,11 @@ int16_t	norm_l(int32_t L_var1);                                /* 30 ops */
 int16_t	norm_s(int16_t var1);                                 /* 15 ops */
 
 /* Division */
-#define divide_s div_s
-// int16_t	divide_s(int16_t var1, int16_t var2);               /* 18 ops */
+#ifdef __arm__
+	#define divide_s div_s
+#else
+	int16_t	divide_s(int16_t var1, int16_t var2);               /* 18 ops */
+#endif
 
 /* -------------------------------------------------------------------------- */
 /* 40-Bit Routines....added by Andre 11/23/99 */

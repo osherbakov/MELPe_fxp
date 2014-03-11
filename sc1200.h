@@ -19,19 +19,35 @@
 #ifndef  _SC1200_H_
 #define  _SC1200_H_
 
-#define ARM_MATH_CM4
-#define __FPU_PRESENT 1
+#ifdef __arm__
+	#define ARM_MATH_CM4
+	#define __FPU_PRESENT 1
 
-#include <arm_math.h>
+	#include <arm_math.h>
+	#include <assert.h>
+#else
+	#ifndef int32_t
+	typedef long int		int32_t;				/* 32 bit "accumulator" (L_*) */
+	#endif
+
+	#ifndef int16_t
+	typedef short int		int16_t;				/* 16 bit "register" (sw*) */
+	#endif
+
+	#ifndef uint16_t
+	typedef unsigned short	uint16_t;				/* 16 bit unsigned data */
+	#endif
+
+	#ifndef uint32_t
+	typedef unsigned long	uint32_t;				/* 32 bit unsigned data */
+	#endif
+#endif
 
 /* =================== */
 /* Definition of Types */
 /* =================== */
 
-// typedef long int		int32_t;				/* 32 bit "accumulator" (L_*) */
-// typedef short int		int16_t;				/* 16 bit "register" (sw*) */
-// typedef unsigned short	uint16_t;				/* 16 bit unsigned data */
-// typedef unsigned long	uint32_t;				/* 32 bit unsigned data */
+
 typedef double			Word40;					/* 40 bit "accumulator"	*/					
 /* ================== */
 /* General Definition */
