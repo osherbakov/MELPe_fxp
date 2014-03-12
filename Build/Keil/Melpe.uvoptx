@@ -170,7 +170,24 @@
           <Name>-S0 -C0 -P0 )  -FN1 -FC1000 -FD20000000 -FF0STM32F4xx_384 -FL060000 -FS08000000 -FP0($$Device:STM32F401RE$Flash\STM32F4xx_384.FLM)</Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>277</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134296732</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Projects\melpe_fxp_src\sc1200.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Melpe\../../sc1200.c\277</Expression>
+        </Bp>
+      </Breakpoint>
       <MemoryWindow1>
         <Mm>
           <WinNumber>1</WinNumber>
@@ -258,8 +275,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>1</TopLine>
-      <CurrentLine>80</CurrentLine>
+      <TopLine>500</TopLine>
+      <CurrentLine>645</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\dsp_sub.c</PathWithFileName>
       <FilenameWithoutPath>dsp_sub.c</FilenameWithoutPath>
@@ -288,10 +305,10 @@
       <FileType>1</FileType>
       <tvExp>0</tvExp>
       <Focus>0</Focus>
-      <ColumnNumber>9</ColumnNumber>
+      <ColumnNumber>28</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>9</TopLine>
-      <CurrentLine>32</CurrentLine>
+      <TopLine>114</TopLine>
+      <CurrentLine>118</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\fft_lib.c</PathWithFileName>
       <FilenameWithoutPath>fft_lib.c</FilenameWithoutPath>
@@ -354,8 +371,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>152</TopLine>
-      <CurrentLine>153</CurrentLine>
+      <TopLine>145</TopLine>
+      <CurrentLine>151</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\harm.c</PathWithFileName>
       <FilenameWithoutPath>harm.c</FilenameWithoutPath>
@@ -386,7 +403,7 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>438</TopLine>
+      <TopLine>426</TopLine>
       <CurrentLine>431</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\mat_lib.c</PathWithFileName>
@@ -434,8 +451,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>221</TopLine>
-      <CurrentLine>232</CurrentLine>
+      <TopLine>705</TopLine>
+      <CurrentLine>891</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\melp_ana.c</PathWithFileName>
       <FilenameWithoutPath>melp_ana.c</FilenameWithoutPath>
@@ -562,8 +579,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>98</TopLine>
-      <CurrentLine>355</CurrentLine>
+      <TopLine>119</TopLine>
+      <CurrentLine>60</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\postfilt.c</PathWithFileName>
       <FilenameWithoutPath>postfilt.c</FilenameWithoutPath>
@@ -610,8 +627,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>56</TopLine>
-      <CurrentLine>62</CurrentLine>
+      <TopLine>276</TopLine>
+      <CurrentLine>282</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\sc1200.c</PathWithFileName>
       <FilenameWithoutPath>sc1200.c</FilenameWithoutPath>
@@ -642,8 +659,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>275</TopLine>
-      <CurrentLine>276</CurrentLine>
+      <TopLine>119</TopLine>
+      <CurrentLine>124</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\vq_lib.c</PathWithFileName>
       <FilenameWithoutPath>vq_lib.c</FilenameWithoutPath>
@@ -682,8 +699,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>0</TopLine>
-      <CurrentLine>0</CurrentLine>
+      <TopLine>111</TopLine>
+      <CurrentLine>116</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\ARM\Retarget.c</PathWithFileName>
       <FilenameWithoutPath>Retarget.c</FilenameWithoutPath>
@@ -762,8 +779,8 @@
       <Focus>0</Focus>
       <ColumnNumber>0</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>178</TopLine>
-      <CurrentLine>183</CurrentLine>
+      <TopLine>217</TopLine>
+      <CurrentLine>222</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>RTE\Device\STM32F401RE\startup_stm32f401xx.s</PathWithFileName>
       <FilenameWithoutPath>startup_stm32f401xx.s</FilenameWithoutPath>
