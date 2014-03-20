@@ -177,7 +177,7 @@ static void		double_ver(int16_t sig_in[], int16_t *pcorr,
 
 
 /* f_pitch_scale.c: Scale pitch signal buffer for best precision              */
-
+// TODO: 657 ms
 int16_t f_pitch_scale(int16_t sig_out[], int16_t sig_in[],
 						int16_t length)
 {

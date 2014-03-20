@@ -256,39 +256,39 @@ void dc_rmv(int16_t sigin[], int16_t sigout[], int16_t delin[],
 /* and then add them.  This means when "len" is large the result could be     */
 /* wrong.  Now "sum" is declared a int32_t and all these problems disappear. */
 
-void remove_dc(int16_t sigin[], int16_t sigout[], int16_t len)
-{
-	register int16_t	i;
-	int16_t	up_shift, two_power_down;
-	int32_t	sum;
-	int16_t	temp;
-	int16_t	offset;
+//void remove_dc(int16_t sigin[], int16_t sigout[], int16_t len)
+//{
+//	register int16_t	i;
+//	int16_t	up_shift, two_power_down;
+//	int32_t	sum;
+//	int16_t	temp;
+//	int16_t	offset;
 
 
-	/* Find up_shift and two_power_down.  Note that two_power_down can be     */
-	/* equal to len.                                                          */
+//	/* Find up_shift and two_power_down.  Note that two_power_down can be     */
+//	/* equal to len.                                                          */
 
-	temp = norm_s(len);
-	up_shift = sub(15, temp);
-	temp = sub(up_shift, 1);
-	two_power_down = shl(1, temp);
+//	temp = norm_s(len);
+//	up_shift = sub(15, temp);
+//	temp = sub(up_shift, 1);
+//	two_power_down = shl(1, temp);
 
-	sum = 0;
-	for (i = 0; i < len; i++)
-		sum = L_add(sum, L_deposit_l(sigin[i]));
-	sum = L_shr(sum, up_shift);
+//	sum = 0;
+//	for (i = 0; i < len; i++)
+//		sum = L_add(sum, L_deposit_l(sigin[i]));
+//	sum = L_shr(sum, up_shift);
 
-	/* if (len > two_power_down) */
-	/* if condition has been removed 'cos it is always true */
-	{
-		temp = divide_s(two_power_down, len);                          /* Q15 */
-		offset = mult(extract_l(sum), temp);
-	}
-	offset = shl(offset, 1);
+//	/* if (len > two_power_down) */
+//	/* if condition has been removed 'cos it is always true */
+//	{
+//		temp = divide_s(two_power_down, len);                          /* Q15 */
+//		offset = mult(extract_l(sum), temp);
+//	}
+//	offset = shl(offset, 1);
 
-	for (i = 0; i < len; i++)
-		sigout[i] = sub(sigin[i], offset);
-}
+//	for (i = 0; i < len; i++)
+//		sigout[i] = sub(sigin[i], offset);
+//}
 
 
 /* Name: gain_ana.c                                                           */

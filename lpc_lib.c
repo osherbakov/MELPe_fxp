@@ -375,15 +375,15 @@ int16_t lpc_clmp(int16_t lsp[], int16_t delta, int16_t order)
 	}
 
 	/* Debug: check if the minimum separation rule was met */
-	temp = mult(32440, delta);                           /* temp = 0.99*delta */
-	for (i = 0; i < order - 1; i++)
-		if ((lsp[i + 1] - lsp[i]) < temp)
-			fprintf(stderr, "%s: LSPs not separated enough (line %d)\n",
-					__FILE__, __LINE__);
+//	temp = mult(32440, delta);                           /* temp = 0.99*delta */
+//	for (i = 0; i < order - 1; i++)
+//		if ((lsp[i + 1] - lsp[i]) < temp)
+//			fprintf(stderr, "%s: LSPs not separated enough (line %d)\n",
+//					__FILE__, __LINE__);
 
-	if (unsorted)
-		fprintf(stderr, "%s: Fxp LSPs still unsorted (line %d)\n",
-				__FILE__, __LINE__);
+//	if (unsorted)
+//		fprintf(stderr, "%s: Fxp LSPs still unsorted (line %d)\n",
+//				__FILE__, __LINE__);
 
 	return(0);
 }

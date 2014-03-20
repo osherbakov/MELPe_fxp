@@ -19,7 +19,7 @@
 #ifndef  _SC1200_H_
 #define  _SC1200_H_
 
-#ifdef __arm__
+#ifdef __CC_ARM
 	#define ARM_MATH_CM4
 	#define __FPU_PRESENT 1
 
@@ -298,13 +298,13 @@ void	melp_syn_init(void);
 
 void	melp_chn_write(struct quant_param *qpar, unsigned char chbuf[]);
 
-void	low_rate_chn_write(struct quant_param *qpar);
+// void	low_rate_chn_write(struct quant_param *qpar);
 
 BOOLEAN	melp_chn_read(struct quant_param *qpar, struct melp_param *par,
 					  struct melp_param *prev_par, unsigned char chbuf[]);
 
-BOOLEAN	low_rate_chn_read(struct quant_param *qpar, struct melp_param *par,
-                          struct melp_param *prev_par);
+// BOOLEAN	low_rate_chn_read(struct quant_param *qpar, struct melp_param *par,
+//                          struct melp_param *prev_par);
 
 void	fec_code(struct quant_param *par);
 

@@ -59,6 +59,7 @@ static void		realIDFT(int16_t mag[], int16_t phase[],
 ** Return value:			None
 **
 *****************************************************************************/
+// TODO: 2.0 s
 static void realIDFT(int16_t mag[], int16_t phase[], int16_t signal[],
 					 int16_t length)
 {

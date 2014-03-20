@@ -37,7 +37,7 @@ Secretariat fax: +33 493 65 47 16.
 #ifndef _MAT_LIB_H_
 #define _MAT_LIB_H_
 
-#ifdef __arm__
+#ifdef __CC_ARM
 	#define ARM_MATH_CM4
 	#define __FPU_PRESENT 1
 

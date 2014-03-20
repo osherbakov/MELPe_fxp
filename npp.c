@@ -176,12 +176,12 @@ void	npp(int16_t sp_in[], int16_t sp_out[])
 
 	if (first_time){
 	
-		if (rate == RATE1200)
-			v_equ(initial_noise, sp_in, ENH_WINLEN);
-		else {
+//		if (rate == RATE1200)
+//			v_equ(initial_noise, sp_in, ENH_WINLEN);
+//		else {
 			v_zap(initial_noise, ENH_OVERLAP_LEN);
 			v_equ(&initial_noise[ENH_OVERLAP_LEN], sp_in, ENH_WIN_SHIFT);
-		}
+//		}
 		enh_init();                         /* Initialize enhancement routine */
 		v_zap(speech_in_npp, ENH_WINLEN);
 
@@ -857,6 +857,8 @@ static int16_t	noise_slope()
 /* It actually compares x1 = (num1 * 2^shift1) and x2 = (num2 * 2^shift2). */
 /* The sign of the returned value is the same as that of (x1 - x2).        */
 /***************************************************************************/
+
+// TODO: 454 ms 
 static int16_t	comp_data_shift(int16_t num1, int16_t shift1,
 									int16_t num2, int16_t shift2)
 {

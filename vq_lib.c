@@ -117,6 +117,7 @@ int16_t *vq_lspw(int16_t weight[], int16_t lsp[], int16_t lpc[],
 /*      Note:                                                                 */
 /*          The coder does not use the returned value from vq_lspw() at all.  */
 
+// TODO:  4.03 s
 int16_t vq_ms4(const int16_t *cb, int16_t *u, const int16_t *u_est,
 				 const int16_t levels[], int16_t ma, int16_t stages,
 				 int16_t order, int16_t weights[], int16_t *u_hat,
@@ -466,6 +467,7 @@ void vq_msd2(const int16_t *cb, int16_t *u_hat, const int16_t *u_est,
 /*      Note:                                                                 */
 /*          The coder does not use the returned value from vq_lspw() at all.  */
 
+// TODO: 428 ms
 int32_t vq_enc(const int16_t codebook[], int16_t u[], int16_t levels,
 				int16_t order, int16_t u_hat[], int16_t *indices)
 {

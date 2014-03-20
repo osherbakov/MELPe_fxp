@@ -343,7 +343,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>3</Optim>
             <oTime>1</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -404,11 +404,6 @@
         <Group>
           <GroupName>Codec</GroupName>
           <Files>
-            <File>
-              <FileName>classify.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\classify.c</FilePath>
-            </File>
             <File>
               <FileName>coeff.c</FileName>
               <FileType>1</FileType>
@@ -515,24 +510,9 @@
               <FilePath>..\..\postfilt.c</FilePath>
             </File>
             <File>
-              <FileName>qnt12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\qnt12.c</FilePath>
-            </File>
-            <File>
-              <FileName>qnt12_cb.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\qnt12_cb.c</FilePath>
-            </File>
-            <File>
               <FileName>sc1200.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\sc1200.c</FilePath>
-            </File>
-            <File>
-              <FileName>transcode.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\transcode.c</FilePath>
             </File>
             <File>
               <FileName>vq_lib.c</FileName>

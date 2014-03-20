@@ -109,7 +109,7 @@ static void		melp_syn(struct melp_param *par, int16_t sp_out[]);
 *****************************************************************************/
 void synthesis(struct melp_param *par, int16_t sp_out[])
 {
-	register int16_t	i;
+//	register int16_t	i;
 
 
 	/* Copy previous period of processed speech to output array */
@@ -125,23 +125,24 @@ void synthesis(struct melp_param *par, int16_t sp_out[])
 	erase = FALSE;                                         /* no erasures yet */
 
 	/* Read and decode channel input buffer. */
-	if (rate == RATE2400)
+//	if (rate == RATE2400)
 		erase = melp_chn_read(&quant_par, par, &prev_par, chbuf);
-#if !SKIP_CHANNEL
-	else
-		erase = (BOOLEAN) low_rate_chn_read(&quant_par, par, &prev_par);
-#endif
+//#if !SKIP_CHANNEL
+//	else
+//		erase = (BOOLEAN) low_rate_chn_read(&quant_par, par, &prev_par);
+//#endif
 
-	if (rate == RATE2400){
+//	if (rate == RATE2400){
 		par->uv_flag = quant_par.uv_flag[0];
 		melp_syn(par, sp_out);
-	} else {
-		for (i = 0; i < NF; i++){
-			melp_syn(&par[i], &sp_out[i*FRAME]);
-			if ((syn_begin > 0) && (i < NF - 1))
-				v_equ(&sp_out[(i + 1)*FRAME], sigsave, syn_begin);
-		}
-	}
+//	} 
+//	else {
+//		for (i = 0; i < NF; i++){
+//			melp_syn(&par[i], &sp_out[i*FRAME]);
+//			if ((syn_begin > 0) && (i < NF - 1))
+//				v_equ(&sp_out[(i + 1)*FRAME], sigsave, syn_begin);
+//		}
+//	}
 }
 
 

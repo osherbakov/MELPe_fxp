@@ -80,8 +80,8 @@ void	window_Q(int16_t input[], int16_t win_coeff[], int16_t output[],
 
 void	writebl(int16_t output[], FILE *fp_out, int16_t size);
 
-void	polflt(int16_t input[], int16_t coeff[], int16_t output[],
-			   int16_t order, int16_t npts);
+//void	polflt(int16_t input[], int16_t coeff[], int16_t output[],
+//			   int16_t order, int16_t npts);
 
 void	zerflt(int16_t input[], const int16_t coeff[], int16_t output[],
 			   int16_t order, int16_t npts);

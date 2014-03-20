@@ -59,6 +59,7 @@ static uint32_t	L_mpyu(uint16_t var1, uint16_t var2);
 /* and two previous output samples.  Output is scaled down by 4 bits from     */
 /* input signal.  input[], prev_in and output[] are of the same Q value.      */
 
+// TODO : 630ms
 void envelope(int16_t input[], int16_t prev_in, int16_t output[],
 			  int16_t npts)
 {
@@ -86,6 +87,8 @@ void envelope(int16_t input[], int16_t prev_in, int16_t output[],
 /* ====================================================== */
 /* This function fills an input array with a given value. */
 /* ====================================================== */
+
+// TODO: 17ms
 void fill(int16_t output[], int16_t fillval, int16_t npts)
 {
 	register int16_t	i;
@@ -100,6 +103,7 @@ void fill(int16_t output[], int16_t fillval, int16_t npts)
 /* ====================================================== */
 /* This function fills an input array with a given value. */
 /* ====================================================== */
+// TODO:  453ms
 void L_fill(int32_t output[], int32_t fillval, int16_t npts)
 {
 	register int16_t	i;
@@ -567,7 +571,7 @@ BOOLEAN	unpack_code(unsigned char **ptr_ch_begin, int16_t *ptr_ch_bit,
 /* Q values:                                    */
 /*    input - Q0, win_coeff - Q15, output - Q0  */
 /* ============================================ */
-
+// TODO: 53 ms
 void window(int16_t input[], const int16_t win_coeff[], int16_t output[],
 			int16_t npts)
 {
@@ -616,22 +620,22 @@ void writebl(int16_t output[], FILE *fp_out, int16_t size)
 /* Q value:                                                                   */
 /*   input[], output[]: Q0, coeff[]: Q12                                      */
 
-void polflt(int16_t input[], int16_t coeff[], int16_t output[],
-			int16_t order, int16_t npts)
-{
-	register int16_t	i, j;
-	int32_t	accum;                                                 /* Q12 */
+//void polflt(int16_t input[], int16_t coeff[], int16_t output[],
+//			int16_t order, int16_t npts)
+//{
+//	register int16_t	i, j;
+//	int32_t	accum;                                                 /* Q12 */
 
 
-	for (i = 0; i < npts; i++ ){
-		accum = L_shl(L_deposit_l(input[i]), 12);
-		for (j = 1; j <= order; j++)
-			accum = L_msu(accum, output[i - j], coeff[j]);
-		/* Round off output */
-		accum = L_shl(accum, 3);
-		output[i] = round(accum);
-	}
-}
+//	for (i = 0; i < npts; i++ ){
+//		accum = L_shl(L_deposit_l(input[i]), 12);
+//		for (j = 1; j <= order; j++)
+//			accum = L_msu(accum, output[i - j], coeff[j]);
+//		/* Round off output */
+//		accum = L_shl(accum, 3);
+//		output[i] = round(accum);
+//	}
+//}
 
 
 /* Subroutine zerflt(): all zero (FIR) filter.                                */
@@ -640,6 +644,7 @@ void polflt(int16_t input[], int16_t coeff[], int16_t output[],
 /* Q values:                                                                  */
 /*   input[], output[] - Q0, coeff[] - Q12                                    */
 
+// TODO: 976ms
 void zerflt(int16_t input[], const int16_t coeff[], int16_t output[],
 			int16_t order, int16_t npts)
 {
@@ -664,6 +669,7 @@ void zerflt(int16_t input[], const int16_t coeff[], int16_t output[],
 /* Q values:                                                                  */
 /* coeff - specified by Q_coeff, output - same as input                       */
 
+// TODO: 1.3S
 void zerflt_Q(int16_t input[], const int16_t coeff[], int16_t output[],
 			  int16_t order, int16_t npts, int16_t Q_coeff)
 {
@@ -690,6 +696,8 @@ void zerflt_Q(int16_t input[], const int16_t coeff[], int16_t output[],
 /*                                                                            */
 /* Input scaled down by a factor of 2 to prevent overflow                     */
 /* ========================================================================== */
+
+// TODO: 979ms
 void iir_2nd_d(int16_t input[], const int16_t den[], const int16_t num[],
 			   int16_t output[], int16_t delin[], int16_t delout_hi[],
 			   int16_t delout_lo[], int16_t npts)
@@ -737,10 +745,13 @@ void iir_2nd_d(int16_t input[], const int16_t den[], const int16_t num[],
 /*                                                                            */
 /* Input scaled down by a factor of 2 to prevent overflow                     */
 /* ========================================================================== */
+
+// TODO: 3.498 s
 void iir_2nd_s(int16_t input[], const int16_t den[], const int16_t num[],
 			   int16_t output[], int16_t delin[], int16_t delout[],
 			   int16_t npts)
 {
+	
 	register int16_t	i;
 	int32_t	accum;
 
@@ -776,12 +787,13 @@ void iir_2nd_s(int16_t input[], const int16_t den[], const int16_t num[],
 /* returned value are of the same Q value.                                    */
 /* ========================================================================== */
 
-int16_t interp_scalar(int16_t prev, int16_t curr, int16_t ifact)
-{
-	int16_t	out;
+//int16_t interp_scalar(int16_t prev, int16_t curr, int16_t ifact)
+//{
+//	int16_t	out;
 
 
-	interp_array(&prev, &curr, &out, ifact, 1);
-	return(out);
-}
+//	interp_array(&prev, &curr, &out, ifact, 1);
+//	return(out);
+//	return(0);
+//}
 

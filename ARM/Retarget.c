@@ -188,6 +188,6 @@ label:  goto label;  /* endless loop */
 
 void __aeabi_assert(const char *expr, const char *file, int line)
 {
-	printf("Assert at file %s, expr %s, line %d", file, expr, line);
+//	printf("Assert at file %s, expr %s, line %d", file, expr, line);
 	exit(1);
 }

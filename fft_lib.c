@@ -29,6 +29,8 @@ static int16_t		wi_array[FFTLENGTH/2];
 
 
 /* Radix-2, DIT, 2N-point Real FFT */
+
+// TODO: 505 ms
 void rfft(int16_t datam1[], int16_t n)
 {
 	int16_t	i, n_2;
@@ -111,6 +113,7 @@ void rfft(int16_t datam1[], int16_t n)
 }
 
 /* Subroutine FFT: Fast Fourier Transform */
+// TODO: 6.338 s
 int16_t cfft(int16_t datam1[], int16_t nn)
 {
 	register int16_t	i, j;

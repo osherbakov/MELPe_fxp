@@ -28,13 +28,16 @@ Secretariat fax: +33 493 65 47 16.
 */
 
 /* mat_lib.c: Matrix and vector manipulation library                          */
-
-#include <stdlib.h>
-#include <assert.h>
-
 #include "sc1200.h"
 #include "mathhalf.h"
 #include "mat_lib.h"
+
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+
+
+
 
 /***************************************************************************
  *
@@ -143,18 +146,18 @@ int16_t *v_add(int16_t vec1[], const int16_t vec2[], int16_t n)
  *
  *************************************************************************/
 
-int32_t *L_v_add(int32_t L_vec1[], int32_t L_vec2[], int16_t n)
-{
-	register int16_t	i;
+//int32_t *L_v_add(int32_t L_vec1[], int32_t L_vec2[], int16_t n)
+//{
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*L_vec1 = L_add(*L_vec1, *L_vec2);
-		L_vec1 ++;
-		L_vec2 ++;
-	}
-	return(L_vec1 - n);
-}
+//	for (i = 0; i < n; i++){
+//		*L_vec1 = L_add(*L_vec1, *L_vec2);
+//		L_vec1 ++;
+//		L_vec2 ++;
+//	}
+//	return(L_vec1 - n);
+//}
 
 
 /***************************************************************************
@@ -194,17 +197,21 @@ int32_t *L_v_add(int32_t L_vec1[], int32_t L_vec2[], int16_t n)
  *	 KEYWORDS: equate, copy
  *
  *************************************************************************/
+ 
+ // TODO: 682 ms
 int16_t *v_equ(int16_t vec1[], const int16_t vec2[], int16_t n)
 {
-	register int16_t	i;
+	arm_copy_q15((q15_t *)vec2, vec1, n);
+	return(vec1);
+	
+//	register int16_t	i;
 
-
-	for (i = 0; i < n; i++){
-		*vec1 = *vec2;
-		vec1 ++;
-		vec2 ++;
-	}
-	return(vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*vec1 = *vec2;
+//		vec1 ++;
+//		vec2 ++;
+//	}
+//  return (vec1 - n);	
 }
 
 /***************************************************************************
@@ -245,18 +252,22 @@ int16_t *v_equ(int16_t vec1[], const int16_t vec2[], int16_t n)
  *
  *************************************************************************/
 
+// TODO: 872 ms
 int16_t *v_equ_shr(int16_t vec1[], int16_t vec2[], int16_t scale,
 					 int16_t n)
 {
-	register int16_t	i;
+	
+		arm_shift_q15(vec2, -scale, vec1, n);
+		return vec1;
+	
+//	register int16_t	i;
 
-
-	for (i = 0; i < n; i++){
-		*vec1 = shr(*vec2, scale);
-		vec1 ++;
-		vec2 ++;
-	}
-	return(vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*vec1 = shr(*vec2, scale);
+//		vec1 ++;
+//		vec2 ++;
+//	}
+//	return(vec1 - n);
 }
 
 /***************************************************************************
@@ -297,17 +308,21 @@ int16_t *v_equ_shr(int16_t vec1[], int16_t vec2[], int16_t scale,
  *
  *************************************************************************/
 
+// TODO: 183 ms
 int32_t *L_v_equ(int32_t L_vec1[], int32_t L_vec2[], int16_t n)
 {
-	register int16_t	i;
+	arm_copy_q31(L_vec2, L_vec1, n);
+	return L_vec1;
+	
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*L_vec1 = *L_vec2;
-		L_vec1 ++;
-		L_vec2 ++;
-	}
-	return(L_vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*L_vec1 = *L_vec2;
+//		L_vec1 ++;
+//		L_vec2 ++;
+//	}
+//	return(L_vec1 - n);
 }
 
 
@@ -355,31 +370,31 @@ int32_t *L_v_equ(int32_t L_vec1[], int32_t L_vec2[], int16_t n)
  *
  *************************************************************************/
 
-int16_t v_inner(int16_t vec1[], int16_t vec2[], int16_t n,
-				  int16_t qvec1, int16_t qvec2, int16_t qout)
-{
-	register int16_t	i;
-	int16_t	innerprod;
-	int32_t	L_temp;
+//int16_t v_inner(int16_t vec1[], int16_t vec2[], int16_t n,
+//				  int16_t qvec1, int16_t qvec2, int16_t qout)
+//{
+//	register int16_t	i;
+//	int16_t	innerprod;
+//	int32_t	L_temp;
 
 
-	L_temp = 0;
-	for (i = 0; i < n; i++){
-		L_temp = L_mac(L_temp, *vec1, *vec2);
-		vec1 ++;
-		vec2 ++;
-	}
+//	L_temp = 0;
+//	for (i = 0; i < n; i++){
+//		L_temp = L_mac(L_temp, *vec1, *vec2);
+//		vec1 ++;
+//		vec2 ++;
+//	}
 
-	/* (qvec1 + qvec2 + 1) is the Q value from L_mult(vec1[i], vec2[i]), and  */
-	/* also that for L_temp.  To make it Q qout, L_shl() it by                */
-	/* (qout - (qvec1 + qvec2 + 1)).  To return only a int16_t, use         */
-	/* extract_h() after L_shl() by 16.                                       */
+//	/* (qvec1 + qvec2 + 1) is the Q value from L_mult(vec1[i], vec2[i]), and  */
+//	/* also that for L_temp.  To make it Q qout, L_shl() it by                */
+//	/* (qout - (qvec1 + qvec2 + 1)).  To return only a int16_t, use         */
+//	/* extract_h() after L_shl() by 16.                                       */
 
-	innerprod = extract_h(L_shl(L_temp,
-								(int16_t) (qout - ((qvec1 + qvec2 + 1) -
-											 16))));
-	return(innerprod);
-}
+//	innerprod = extract_h(L_shl(L_temp,
+//								(int16_t) (qout - ((qvec1 + qvec2 + 1) -
+//											 16))));
+//	return(innerprod);
+//}
 
 
 /***************************************************************************
@@ -426,25 +441,36 @@ int16_t v_inner(int16_t vec1[], int16_t vec2[], int16_t n,
  *
  *************************************************************************/
 
+// TODO: 3.8 s
 int32_t L_v_inner(int16_t vec1[], int16_t vec2[], int16_t n,
 				   int16_t qvec1, int16_t qvec2, int16_t qout)
 {
-	register int16_t	i;
+
+	int32_t	L_innerprod;
+	q63_t  tmp;
 	int16_t	shift;
-	int32_t	L_innerprod, L_temp;
-
-
-	L_temp = 0;
-	for (i = 0; i < n; i++){
-		L_temp = L_mac(L_temp, *vec1, *vec2);
-		vec1 ++;
-		vec2 ++;
-	}
-
-	/* L_temp is now (qvec1 + qvec2 + 1) */
+	
+	arm_dot_prod_q15(vec1, vec2, n, &tmp);
 	shift = sub(qout, add(add(qvec1, qvec2), 1));
-	L_innerprod = L_shl(L_temp, shift);
-	return(L_innerprod);
+	L_innerprod = L_shl((int32_t)tmp, shift);
+	return(L_innerprod);	
+	
+//	register int16_t	i;
+//	int16_t	shift;
+//	int32_t	L_innerprod, L_temp;
+
+
+//	L_temp = 0;
+//	for (i = 0; i < n; i++){
+//		L_temp = L_mac(L_temp, *vec1, *vec2);
+//		vec1 ++;
+//		vec2 ++;
+//	}
+
+//	/* L_temp is now (qvec1 + qvec2 + 1) */
+//	shift = sub(qout, add(add(qvec1, qvec2), 1));
+//	L_innerprod = L_shl(L_temp, shift);
+//	return(L_innerprod);
 }
 
 
@@ -547,23 +573,33 @@ int16_t v_magsq(int16_t vec1[], int16_t n, int16_t qvec1,
  *
  *************************************************************************/
 
+// TODO: 572 ms
 int32_t L_v_magsq(int16_t vec1[], int16_t n, int16_t qvec1,
 				   int16_t qout)
 {
-	register int16_t	i;
+	q63_t tmp;
 	int16_t	shift;
-	int32_t	L_magsq, L_temp;
-
-
-	L_temp = 0;
-	for (i = 0; i < n; i++){
-		L_temp = L_mac(L_temp, *vec1, *vec1);
-		vec1 ++;
-	}
-	/* ((qout-16)-((2*qvec1+1)-16)) */
+	int32_t	L_magsq;
+	
+	arm_power_q15(vec1, n, &tmp);
 	shift = sub(sub(qout, shl(qvec1, 1)), 1);
-	L_magsq = L_shl(L_temp, shift);
-	return(L_magsq);
+	L_magsq = L_shl((int32_t) tmp, shift);
+	return(L_magsq);	
+	
+//	register int16_t	i;
+//	int16_t	shift;
+//	int32_t	L_magsq, L_temp;
+
+
+//	L_temp = 0;
+//	for (i = 0; i < n; i++){
+//		L_temp = L_mac(L_temp, *vec1, *vec1);
+//		vec1 ++;
+//	}
+//	/* ((qout-16)-((2*qvec1+1)-16)) */
+//	shift = sub(sub(qout, shl(qvec1, 1)), 1);
+//	L_magsq = L_shl(L_temp, shift);
+//	return(L_magsq);
 }
 
 
@@ -608,14 +644,18 @@ int32_t L_v_magsq(int16_t vec1[], int16_t n, int16_t qvec1,
 
 int16_t *v_scale(int16_t vec1[], int16_t scale, int16_t n)
 {
-	register int16_t	i;
+
+	arm_scale_q15(vec1, scale, 0, vec1, n);
+	return vec1;
+	
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*vec1 = mult(*vec1, scale);
-		vec1 ++;
-	}
-	return(vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*vec1 = mult(*vec1, scale);
+//		vec1 ++;
+//	}
+//	return(vec1 - n);
 }
 
 
@@ -664,14 +704,16 @@ int16_t *v_scale(int16_t vec1[], int16_t scale, int16_t n)
 int16_t *v_scale_shl(int16_t vec1[], int16_t scale, int16_t n,
 					   int16_t shift)
 {
-	register int16_t	i;
+	arm_scale_q15(vec1, scale, shift, vec1, n);
+	return vec1;
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*vec1 = extract_h(L_shl(L_mult(*vec1, scale), shift));
-		vec1 ++;
-	}
-	return(vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*vec1 = extract_h(L_shl(L_mult(*vec1, scale), shift));
+//		vec1 ++;
+//	}
+//	return(vec1 - n);
 }
 
 /***************************************************************************
@@ -722,8 +764,9 @@ int16_t *v_scale_shl(int16_t vec1[], int16_t scale, int16_t n,
 
 int16_t *v_sub(int16_t vec1[], const int16_t vec2[], int16_t n)
 {
+//	arm_sub_q15(vec1, vec2, vec1, n);
+//	return vec1;
 	register int16_t	i;
-
 
 	for (i = 0; i < n; i++){
 		*vec1 = sub(*vec1, *vec2);
@@ -771,14 +814,17 @@ int16_t *v_sub(int16_t vec1[], const int16_t vec2[], int16_t n)
  *************************************************************************/
 int16_t *v_zap(int16_t vec1[], int16_t n)
 {
-	register int16_t	i;
+
+	arm_fill_q15(0, vec1, n);
+	return vec1;
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*vec1 = 0;
-		vec1 ++;
-	}
-	return(vec1 - n);
+//	for (i = 0; i < n; i++){
+//		*vec1 = 0;
+//		vec1 ++;
+//	}
+//	return(vec1 - n);
 }
 
 
@@ -817,18 +863,18 @@ int16_t *v_zap(int16_t vec1[], int16_t n)
  *
  *************************************************************************/
 
-int32_t *L_v_zap(int32_t L_vec1[], int16_t n)
-{
-	register int16_t	i;
+//int32_t *L_v_zap(int32_t L_vec1[], int16_t n)
+//{
+//	register int16_t	i;
 
 
-	for (i = 0; i < n; i++){
-		*L_vec1 = 0;
-		L_vec1 ++;
-	}
+//	for (i = 0; i < n; i++){
+//		*L_vec1 = 0;
+//		L_vec1 ++;
+//	}
 
-	return(L_vec1 - n);
-}
+//	return(L_vec1 - n);
+//}
 
 
 int16_t *v_get(int16_t n)

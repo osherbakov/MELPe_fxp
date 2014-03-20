@@ -50,7 +50,7 @@ Secretariat fax: +33 493 65 47 16.
 
 static int16_t	codewd74[7];
 static int16_t	codewd84[8];
-static int16_t	codewd_13x9[13];
+// static int16_t	codewd_13x9[13];
 
 /* (7,4) Hamming code tables.  Parity generator matrix. */
 static const int16_t  pmat74[3][4] = {
@@ -892,9 +892,9 @@ static int16_t	sbc_dec(int16_t x[], int16_t n, int16_t k,
 static int16_t	sbc_syn(int16_t x[], int16_t n, int16_t k,
 							const int16_t pmat[]);
 
-static void		crc4_enc(int16_t bit[], int16_t num_bits);
+//static void		crc4_enc(int16_t bit[], int16_t num_bits);
 
-static int16_t	crc4_dec(int16_t bit[], int16_t num_bits);
+//static int16_t	crc4_dec(int16_t bit[], int16_t num_bits);
 
 
 /*
@@ -957,43 +957,43 @@ void fec_code(struct quant_param *qpar)
 }
 
 
-void	low_rate_fec_code(struct quant_param *par)
-{
-	if (par->uv_flag[0] && par->uv_flag[1] && par->uv_flag[2]){
+//void	low_rate_fec_code(struct quant_param *par)
+//{
+//	if (par->uv_flag[0] && par->uv_flag[1] && par->uv_flag[2]){
 
-		/* for 4 MSB of Gain */
-		vgetbits(codewd84, par->gain_index[0], 9, 4);
-		sbc_enc(codewd84, 8, 4, &pmat84[0][0]);
-		vsetbits(&(par->fs_index), 7, 4, &codewd84[4]);
+//		/* for 4 MSB of Gain */
+//		vgetbits(codewd84, par->gain_index[0], 9, 4);
+//		sbc_enc(codewd84, 8, 4, &pmat84[0][0]);
+//		vsetbits(&(par->fs_index), 7, 4, &codewd84[4]);
 
-		/* for next 4 MSB of Gain */
-		vgetbits(codewd84, par->gain_index[0], 5, 4);
-		sbc_enc(codewd84, 8, 4, &pmat84[0][0]);
-		vsetbits(&(par->fs_index), 3, 4, &codewd84[4]);
+//		/* for next 4 MSB of Gain */
+//		vgetbits(codewd84, par->gain_index[0], 5, 4);
+//		sbc_enc(codewd84, 8, 4, &pmat84[0][0]);
+//		vsetbits(&(par->fs_index), 3, 4, &codewd84[4]);
 
-		/* for 3 LSB of Gain */
-		vgetbits(codewd74, par->gain_index[0], 1, 2);
-		codewd74[2] = codewd74[3] = 0;
-		sbc_enc(codewd74, 7, 4, &pmat74[0][0]);
-		vsetbits(&(par->bpvc_index[0]), 1, 2, &codewd74[4]);
-		vsetbits(&(par->jit_index[0]), 0, 1, &codewd74[6]);
+//		/* for 3 LSB of Gain */
+//		vgetbits(codewd74, par->gain_index[0], 1, 2);
+//		codewd74[2] = codewd74[3] = 0;
+//		sbc_enc(codewd74, 7, 4, &pmat74[0][0]);
+//		vsetbits(&(par->bpvc_index[0]), 1, 2, &codewd74[4]);
+//		vsetbits(&(par->jit_index[0]), 0, 1, &codewd74[6]);
 
-		/* for LSPs of 1st frame */
-		vgetbits(&codewd_13x9[4], par->lsf_index[0][0], 8, 9);
-		crc4_enc(codewd_13x9, 9);
-		vsetbits(&(par->lsf_index[0][1]), 3, 4, &codewd_13x9[0]);
+//		/* for LSPs of 1st frame */
+//		vgetbits(&codewd_13x9[4], par->lsf_index[0][0], 8, 9);
+//		crc4_enc(codewd_13x9, 9);
+//		vsetbits(&(par->lsf_index[0][1]), 3, 4, &codewd_13x9[0]);
 
-		/* for LSPs of 2nd frame */
-		vgetbits(&codewd_13x9[4], par->lsf_index[1][0], 8, 9);
-		crc4_enc(codewd_13x9, 9);
-		vsetbits(&(par->lsf_index[1][1]), 3, 4, &codewd_13x9[0]);
+//		/* for LSPs of 2nd frame */
+//		vgetbits(&codewd_13x9[4], par->lsf_index[1][0], 8, 9);
+//		crc4_enc(codewd_13x9, 9);
+//		vsetbits(&(par->lsf_index[1][1]), 3, 4, &codewd_13x9[0]);
 
-		/* for LSPs of 3rd frame */
-		vgetbits(&codewd_13x9[4], par->lsf_index[2][0], 8, 9);
-		crc4_enc(codewd_13x9, 9);
-		vsetbits(&(par->lsf_index[2][1]), 3, 4, &codewd_13x9[0]);
-	}
-}
+//		/* for LSPs of 3rd frame */
+//		vgetbits(&codewd_13x9[4], par->lsf_index[2][0], 8, 9);
+//		crc4_enc(codewd_13x9, 9);
+//		vsetbits(&(par->lsf_index[2][1]), 3, 4, &codewd_13x9[0]);
+//	}
+//}
 
 
 int16_t fec_decode(struct quant_param *qpar, int16_t erase)
@@ -1014,7 +1014,7 @@ int16_t fec_decode(struct quant_param *qpar, int16_t erase)
 		if (!erase)
 			qpar->pitch_index -= 2;                  /* Subtract to acct. for */
                                                      /* reserved pitch codes. */
-	}
+}
 
 	if (qpar->uv_flag[0] && !erase){
 
@@ -1067,55 +1067,55 @@ int16_t fec_decode(struct quant_param *qpar, int16_t erase)
 }
 
 
-int16_t	low_rate_fec_decode(struct quant_param *qpar, int16_t erase,
-								int16_t lsp_check[])
-{
-	int16_t	berr_pos;
+//int16_t	low_rate_fec_decode(struct quant_param *qpar, int16_t erase,
+//								int16_t lsp_check[])
+//{
+//	int16_t	berr_pos;
 
 
-	if (qpar->uv_flag[0] && qpar->uv_flag[1] && qpar->uv_flag[2]){
-		/* for 4 MSB of Gain */
-		vgetbits(codewd84, qpar->gain_index[0], 9, 4);
-		vgetbits(&codewd84[4], qpar->fs_index, 7, 4);
-		berr_pos = sbc_dec(codewd84, 8, 4, &pmat84[0][0], syntab84);
-		erase |= berr_pos == BEP_UNCORR;
-		vsetbits(qpar->gain_index, 9, 4, codewd84);
+//	if (qpar->uv_flag[0] && qpar->uv_flag[1] && qpar->uv_flag[2]){
+//		/* for 4 MSB of Gain */
+//		vgetbits(codewd84, qpar->gain_index[0], 9, 4);
+//		vgetbits(&codewd84[4], qpar->fs_index, 7, 4);
+//		berr_pos = sbc_dec(codewd84, 8, 4, &pmat84[0][0], syntab84);
+//		erase |= berr_pos == BEP_UNCORR;
+//		vsetbits(qpar->gain_index, 9, 4, codewd84);
 
-		/* for next 4 MSB of Gain */
-		vgetbits(codewd84, qpar->gain_index[0], 5, 4);
-		vgetbits(&codewd84[4], qpar->fs_index, 3, 4);
-		berr_pos = sbc_dec(codewd84, 8, 4, &pmat84[0][0], syntab84);
-		erase |= berr_pos == BEP_UNCORR;
-		vsetbits(qpar->gain_index, 5, 4, codewd84);
+//		/* for next 4 MSB of Gain */
+//		vgetbits(codewd84, qpar->gain_index[0], 5, 4);
+//		vgetbits(&codewd84[4], qpar->fs_index, 3, 4);
+//		berr_pos = sbc_dec(codewd84, 8, 4, &pmat84[0][0], syntab84);
+//		erase |= berr_pos == BEP_UNCORR;
+//		vsetbits(qpar->gain_index, 5, 4, codewd84);
 
-		if (!erase){
+//		if (!erase){
 
-			/* for 2 LSB of Gain */
-			vgetbits(codewd74, qpar->gain_index[0], 1, 2);
-			codewd74[2] = codewd74[3] = 0;
-			vgetbits(&codewd74[4], qpar->bpvc_index[0], 1, 2);
-			vgetbits(&codewd74[6], qpar->jit_index[0], 0, 1);
-			berr_pos = sbc_dec(codewd74, 7, 4, &pmat74[0][0], syntab74);
-			vsetbits(qpar->gain_index, 1, 2, codewd74);
+//			/* for 2 LSB of Gain */
+//			vgetbits(codewd74, qpar->gain_index[0], 1, 2);
+//			codewd74[2] = codewd74[3] = 0;
+//			vgetbits(&codewd74[4], qpar->bpvc_index[0], 1, 2);
+//			vgetbits(&codewd74[6], qpar->jit_index[0], 0, 1);
+//			berr_pos = sbc_dec(codewd74, 7, 4, &pmat74[0][0], syntab74);
+//			vsetbits(qpar->gain_index, 1, 2, codewd74);
 
-			/* for LSPs of 1st frame */
-			vgetbits(&codewd_13x9[4], qpar->lsf_index[0][0], 8, 9);
-			vgetbits(&codewd_13x9[0], qpar->lsf_index[0][1], 3, 4);
-			lsp_check[0] = crc4_dec(codewd_13x9, 13);
+//			/* for LSPs of 1st frame */
+//			vgetbits(&codewd_13x9[4], qpar->lsf_index[0][0], 8, 9);
+//			vgetbits(&codewd_13x9[0], qpar->lsf_index[0][1], 3, 4);
+//			lsp_check[0] = crc4_dec(codewd_13x9, 13);
 
-			/* for LSPs of 1st frame */
-			vgetbits(&codewd_13x9[4], qpar->lsf_index[1][0], 8, 9);
-			vgetbits(&codewd_13x9[0], qpar->lsf_index[1][1], 3, 4);
-			lsp_check[1] = crc4_dec(codewd_13x9, 13);
+//			/* for LSPs of 1st frame */
+//			vgetbits(&codewd_13x9[4], qpar->lsf_index[1][0], 8, 9);
+//			vgetbits(&codewd_13x9[0], qpar->lsf_index[1][1], 3, 4);
+//			lsp_check[1] = crc4_dec(codewd_13x9, 13);
 
-			/* for LSPs of 1st frame */
-			vgetbits(&codewd_13x9[4], qpar->lsf_index[2][0], 8, 9);
-			vgetbits(&codewd_13x9[0], qpar->lsf_index[2][1], 3, 4);
-			lsp_check[2] = crc4_dec(codewd_13x9, 13);
-		}
-	}
-	return(erase);
-}
+//			/* for LSPs of 1st frame */
+//			vgetbits(&codewd_13x9[4], qpar->lsf_index[2][0], 8, 9);
+//			vgetbits(&codewd_13x9[0], qpar->lsf_index[2][1], 3, 4);
+//			lsp_check[2] = crc4_dec(codewd_13x9, 13);
+//		}
+//	}
+//	return(erase);
+//}
 
 
 /* binprod returns a bitwise modulo-2 inner product between int arrays x[]    */
@@ -1231,48 +1231,48 @@ static int16_t	sbc_syn(int16_t x[], int16_t n, int16_t k,
 }
 
 
-static void		crc4_enc(int16_t bit[], int16_t num_bits)
-{
-	register int16_t	i;
-	int16_t	delay[4], x, ll;
+//static void		crc4_enc(int16_t bit[], int16_t num_bits)
+//{
+//	register int16_t	i;
+//	int16_t	delay[4], x, ll;
 
 
-	ll = add(num_bits, 4);
-	v_zap(delay, 4);
+//	ll = add(num_bits, 4);
+//	v_zap(delay, 4);
 
-	for (i = 1; i <= num_bits; i++){
-		x = (int16_t) (delay[3] ^ bit[ll - i]);
+//	for (i = 1; i <= num_bits; i++){
+//		x = (int16_t) (delay[3] ^ bit[ll - i]);
 
-		delay[3] = delay[2];
-		delay[2] = delay[1];
-		delay[1] = (int16_t) (x ^ delay[0]);
-		delay[0] = x;
-	}
+//		delay[3] = delay[2];
+//		delay[2] = delay[1];
+//		delay[1] = (int16_t) (x ^ delay[0]);
+//		delay[0] = x;
+//	}
 
-	v_equ(bit, delay, 4);
-}
+//	v_equ(bit, delay, 4);
+//}
 
 
-static int16_t	crc4_dec(int16_t bit[], int16_t num_bits)
-{
-	register int16_t	i;
-	int16_t	delay[4], x;
+//static int16_t	crc4_dec(int16_t bit[], int16_t num_bits)
+//{
+//	register int16_t	i;
+//	int16_t	delay[4], x;
 
-	for (i = 1; i <= 4; i++)
-		delay[4 - i] = bit[num_bits - i];
+//	for (i = 1; i <= 4; i++)
+//		delay[4 - i] = bit[num_bits - i];
 
-	for (i = 5; i <= num_bits; i++){
-		x = delay[3];
-		delay[3] = delay[2];
-		delay[2] = delay[1];
-		delay[1] = (int16_t) (x ^ delay[0]);
-		delay[0] = (int16_t) (x ^ bit[num_bits - i]);
-	}
+//	for (i = 5; i <= num_bits; i++){
+//		x = delay[3];
+//		delay[3] = delay[2];
+//		delay[2] = delay[1];
+//		delay[1] = (int16_t) (x ^ delay[0]);
+//		delay[0] = (int16_t) (x ^ bit[num_bits - i]);
+//	}
 
-	x = 0x0;
-	for (i = 0; i < 4; i++)
-		x |= delay[i];
+//	x = 0x0;
+//	for (i = 0; i < 4; i++)
+//		x |= delay[i];
 
-	return(x);
-}
+//	return(x);
+//}
 

@@ -174,60 +174,60 @@ void find_harm(int16_t input[], int16_t fsmag[], int16_t pitch,
 /* Q values:                                                                  */
 /*      real - Q13, signal - Q15                                              */
 
-void idft_real(int16_t real[], int16_t signal[], int16_t length)
-{
-	register int16_t	i, j, k;
-	static int16_t	idftc[DFTMAX];
-	int16_t	k_inc, length2;
-	int16_t	w, w2;
-	int16_t	temp;
-	int32_t	L_temp;
+//void idft_real(int16_t real[], int16_t signal[], int16_t length)
+//{
+//	register int16_t	i, j, k;
+//	static int16_t	idftc[DFTMAX];
+//	int16_t	k_inc, length2;
+//	int16_t	w, w2;
+//	int16_t	temp;
+//	int32_t	L_temp;
 
 
-	assert(length <= DFTMAX);
-	length2 = add(shr(length, 1), 1);
-	/*	w = TWOPI / length; */
-	w = divide_s(TWO_Q3, length);                      /* w = 2/length in Q18 */
+//	assert(length <= DFTMAX);
+//	length2 = add(shr(length, 1), 1);
+//	/*	w = TWOPI / length; */
+//	w = divide_s(TWO_Q3, length);                      /* w = 2/length in Q18 */
 
-	for (i = 0; i < length; i++ ){
-		L_temp = L_mult(w, i);                               /* L_temp in Q19 */
+//	for (i = 0; i < length; i++ ){
+//		L_temp = L_mult(w, i);                               /* L_temp in Q19 */
 
-		/* make sure argument for cos function is less than 1 */
-		if (L_temp > (int32_t) ONE_Q19){
-			/*	cos(pi+x) = cos(pi-x) */
-			L_temp = L_sub((int32_t) TWO_Q19, L_temp);
-		} else if (L_temp == (int32_t) ONE_Q19)
-			L_temp = L_sub(L_temp, 1);
+//		/* make sure argument for cos function is less than 1 */
+//		if (L_temp > (int32_t) ONE_Q19){
+//			/*	cos(pi+x) = cos(pi-x) */
+//			L_temp = L_sub((int32_t) TWO_Q19, L_temp);
+//		} else if (L_temp == (int32_t) ONE_Q19)
+//			L_temp = L_sub(L_temp, 1);
 
-		L_temp = L_shr(L_temp, 4);                           /* L_temp in Q15 */
-		temp = extract_l(L_temp);
-		idftc[i] = cos_fxp(temp);                             /* idftc in Q15 */
-	}
+//		L_temp = L_shr(L_temp, 4);                           /* L_temp in Q15 */
+//		temp = extract_l(L_temp);
+//		idftc[i] = cos_fxp(temp);                             /* idftc in Q15 */
+//	}
 
-	w = shr(w, 1);                                     /* w = 2/length in Q17 */
-	w2 = shr(w, 1);                                   /* w2 = 1/length in Q17 */
-	real[0] = mult(real[0], w2);                               /* real in Q15 */
-	temp = sub(length2, 1);
-	for (i = 1; i < temp; i++){
-		/*	real[i] *= (2.0/length); */
-		real[i] = mult(real[i], w);
-	}
-	temp = shl(i, 1);
-	if (temp == length)                           /* real[i] *= (1.0/length); */
-		real[i] = mult(real[i], w2);
-	else                                           /* real[i] *= (2.0/length);*/
-		real[i] = mult(real[i], w);
+//	w = shr(w, 1);                                     /* w = 2/length in Q17 */
+//	w2 = shr(w, 1);                                   /* w2 = 1/length in Q17 */
+//	real[0] = mult(real[0], w2);                               /* real in Q15 */
+//	temp = sub(length2, 1);
+//	for (i = 1; i < temp; i++){
+//		/*	real[i] *= (2.0/length); */
+//		real[i] = mult(real[i], w);
+//	}
+//	temp = shl(i, 1);
+//	if (temp == length)                           /* real[i] *= (1.0/length); */
+//		real[i] = mult(real[i], w2);
+//	else                                           /* real[i] *= (2.0/length);*/
+//		real[i] = mult(real[i], w);
 
-	for (i = 0; i < length; i++){
-		L_temp = L_deposit_h(real[0]);                       /* L_temp in Q31 */
-		k_inc = i;
-		k = k_inc;
-		for (j = 1; j < length2; j++){
-			L_temp = L_mac(L_temp, real[j], idftc[k]);
-			k = add(k, k_inc);
-			if (k >= length)
-				k = sub(k, length);
-		}
-		signal[i] = round(L_temp);
-	}
-}
+//	for (i = 0; i < length; i++){
+//		L_temp = L_deposit_h(real[0]);                       /* L_temp in Q31 */
+//		k_inc = i;
+//		k = k_inc;
+//		for (j = 1; j < length2; j++){
+//			L_temp = L_mac(L_temp, real[j], idftc[k]);
+//			k = add(k, k_inc);
+//			if (k >= length)
+//				k = sub(k, length);
+//		}
+//		signal[i] = round(L_temp);
+//	}
+//}

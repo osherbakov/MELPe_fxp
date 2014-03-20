@@ -1783,10 +1783,10 @@ int16_t shift_r(int16_t var1, int16_t var2)
 
 Word40	L40_add(Word40 acc, int32_t L_var1)
 {
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
 	acc = acc + (Word40)L_var1;
 
@@ -1828,126 +1828,126 @@ Word40	L40_add(Word40 acc, int32_t L_var1)
  |___________________________________________________________________________|
 */
 
-Word40 L40_sub(Word40 acc, int32_t L_var1)
-{
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//Word40 L40_sub(Word40 acc, int32_t L_var1)
+//{
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	acc = acc - (Word40)L_var1;
+//	acc = acc - (Word40)L_var1;
 
-	if (acc > MAX_40){
-		acc = MAX_40;
-		/* Overflow = 1; */
-	}
-	if (acc < MIN_40){
-		acc = MIN_40;
-		/* Overflow = 1; */
-	}
-	return(acc);
-}
+//	if (acc > MAX_40){
+//		acc = MAX_40;
+//		/* Overflow = 1; */
+//	}
+//	if (acc < MIN_40){
+//		acc = MIN_40;
+//		/* Overflow = 1; */
+//	}
+//	return(acc);
+//}
 
-/*___________________________________________________________________________
- |                                                                           |
- |   Function Name : L40_mac                                                 |
- |                                                                           |
- |   Purpose :                                                               |
- |                                                                           |
- |   Multiply var1 by var2 and shift the result left by 1. Add the result    |
- |   to 40 bits accumulator with overflow control and saturation; the result |
- |   is set at MAX40 when overflow occurs or at MIN40 when underflow occurs. |
- |                                                                           |
- |   Complexity weight : 1                                                   |
- |                                                                           |
- |   Inputs :                                                                |
- |                                                                           |
- |    acc      40 bits accumulator (Word40) whose value falls in the         |
- |             range : MIN40 <= acc <= MAX40.                                |
- |                                                                           |
- |    var1     16 bit short signed integer (int16_t) whose value falls in the |
- |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
- |                                                                           |
- |    var2     16 bit short signed integer (int16_t) whose value falls in the |
- |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
- |                                                                           |
- |   Return Value :                                                          |
- |                                                                           |
- |    acc      40 bits accumulator (Word40) whose value falls in the         |
- |             range : MIN40 <= acc <= MAX40.                                |
- |___________________________________________________________________________|
-*/
+///*___________________________________________________________________________
+// |                                                                           |
+// |   Function Name : L40_mac                                                 |
+// |                                                                           |
+// |   Purpose :                                                               |
+// |                                                                           |
+// |   Multiply var1 by var2 and shift the result left by 1. Add the result    |
+// |   to 40 bits accumulator with overflow control and saturation; the result |
+// |   is set at MAX40 when overflow occurs or at MIN40 when underflow occurs. |
+// |                                                                           |
+// |   Complexity weight : 1                                                   |
+// |                                                                           |
+// |   Inputs :                                                                |
+// |                                                                           |
+// |    acc      40 bits accumulator (Word40) whose value falls in the         |
+// |             range : MIN40 <= acc <= MAX40.                                |
+// |                                                                           |
+// |    var1     16 bit short signed integer (int16_t) whose value falls in the |
+// |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
+// |                                                                           |
+// |    var2     16 bit short signed integer (int16_t) whose value falls in the |
+// |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
+// |                                                                           |
+// |   Return Value :                                                          |
+// |                                                                           |
+// |    acc      40 bits accumulator (Word40) whose value falls in the         |
+// |             range : MIN40 <= acc <= MAX40.                                |
+// |___________________________________________________________________________|
+//*/
 
-Word40 L40_mac(Word40 acc, int16_t var1, int16_t var2)
-{
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//Word40 L40_mac(Word40 acc, int16_t var1, int16_t var2)
+//{
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	acc = acc + ((Word40)var1 * (Word40)var2 * 2);
+//	acc = acc + ((Word40)var1 * (Word40)var2 * 2);
 
-	if (acc > MAX_40){
-		acc = MAX_40;
-		/* Overflow = 1; */
-	}
-	if (acc < MIN_40){
-		acc = MIN_40;
-		/* Overflow = 1; */
-	}
-	return(acc);
-}
+//	if (acc > MAX_40){
+//		acc = MAX_40;
+//		/* Overflow = 1; */
+//	}
+//	if (acc < MIN_40){
+//		acc = MIN_40;
+//		/* Overflow = 1; */
+//	}
+//	return(acc);
+//}
 
-/*___________________________________________________________________________
- |                                                                           |
- |   Function Name : L40_msu                                                 |
- |                                                                           |
- |   Purpose :                                                               |
- |                                                                           |
- |   Multiply var1 by var2 and shift the result left by 1. Subtract the      |
- |   result to 40 bits accumulator with overflow control and saturation;     |
- |   the result is set at MAX40 when overflow occurs or at MIN40 when        |
- |   underflow occurs.                                                       |
- |                                                                           |
- |   Complexity weight : 1                                                   |
- |                                                                           |
- |   Inputs :                                                                |
- |                                                                           |
- |    acc      40 bits accumulator (Word40) whose value falls in the         |
- |             range : MIN40 <= acc <= MAX40.                                |
- |                                                                           |
- |    var1     16 bit short signed integer (int16_t) whose value falls in the |
- |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
- |                                                                           |
- |    var2     16 bit short signed integer (int16_t) whose value falls in the |
- |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
- |                                                                           |
- |   Return Value :                                                          |
- |                                                                           |
- |    acc      40 bits accumulator (Word40) whose value falls in the         |
- |             range : MIN40 <= acc <= MAX40.                                |
- |___________________________________________________________________________|
-*/
+///*___________________________________________________________________________
+// |                                                                           |
+// |   Function Name : L40_msu                                                 |
+// |                                                                           |
+// |   Purpose :                                                               |
+// |                                                                           |
+// |   Multiply var1 by var2 and shift the result left by 1. Subtract the      |
+// |   result to 40 bits accumulator with overflow control and saturation;     |
+// |   the result is set at MAX40 when overflow occurs or at MIN40 when        |
+// |   underflow occurs.                                                       |
+// |                                                                           |
+// |   Complexity weight : 1                                                   |
+// |                                                                           |
+// |   Inputs :                                                                |
+// |                                                                           |
+// |    acc      40 bits accumulator (Word40) whose value falls in the         |
+// |             range : MIN40 <= acc <= MAX40.                                |
+// |                                                                           |
+// |    var1     16 bit short signed integer (int16_t) whose value falls in the |
+// |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
+// |                                                                           |
+// |    var2     16 bit short signed integer (int16_t) whose value falls in the |
+// |             range : 0xffff 8000 <= var1 <= 0x0000 7fff.                   |
+// |                                                                           |
+// |   Return Value :                                                          |
+// |                                                                           |
+// |    acc      40 bits accumulator (Word40) whose value falls in the         |
+// |             range : MIN40 <= acc <= MAX40.                                |
+// |___________________________________________________________________________|
+//*/
 
-Word40 L40_msu(Word40 acc, int16_t var1, int16_t var2)
-{
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//Word40 L40_msu(Word40 acc, int16_t var1, int16_t var2)
+//{
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	acc = acc - ((Word40)var1 * (Word40)var2 * 2);
+//	acc = acc - ((Word40)var1 * (Word40)var2 * 2);
 
-	if (acc > MAX_40){
-		acc = MAX_40;
-		/* Overflow = 1; */
-	}
-	if (acc < MIN_40){
-		acc = MIN_40;
-		/* Overflow = 1; */
-	}
-	return(acc);
-}
+//	if (acc > MAX_40){
+//		acc = MAX_40;
+//		/* Overflow = 1; */
+//	}
+//	if (acc < MIN_40){
+//		acc = MIN_40;
+//		/* Overflow = 1; */
+//	}
+//	return(acc);
+//}
 
 /*___________________________________________________________________________
  |                                                                           |
@@ -1980,14 +1980,14 @@ Word40 L40_msu(Word40 acc, int16_t var1, int16_t var2)
 Word40 L40_shl(Word40 acc, int16_t var1)
 {
 
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	if (var1 < 0){
-		acc = L40_shr(acc, (int16_t) (-var1));
-	} else {
+//	if (var1 < 0){
+//		acc = L40_shr(acc, (int16_t) (-var1));
+//	} else {
 		for(; var1 > 0; var1--){
 			acc = acc * 2;
 			if (acc > MAX_40){
@@ -1998,7 +1998,7 @@ Word40 L40_shl(Word40 acc, int16_t var1)
 				break;
 			}
 		}
-	}
+//	}
 	return(acc);
 }
 
@@ -2031,25 +2031,25 @@ Word40 L40_shl(Word40 acc, int16_t var1)
  |___________________________________________________________________________|
 */
 
-Word40 L40_shr(Word40 acc, int16_t var1)
-{
+//Word40 L40_shr(Word40 acc, int16_t var1)
+//{
 
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+////	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+////		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+////		exit(0);
+////	}
 
-	if (var1 < 0){
-		acc = L40_shl(acc, (int16_t) -var1);
-	} else { 
-		for ( ; var1 > 0; var1--){
-			acc = floor(acc * 0.5);
-			if ((acc == 0) || (acc == -1))
-				break;
-		}
-	}
-	return(acc);
-}
+//	if (var1 < 0){
+//		acc = L40_shl(acc, (int16_t) -var1);
+//	} else { 
+//		for ( ; var1 > 0; var1--){
+//			acc = floor(acc * 0.5);
+//			if ((acc == 0) || (acc == -1))
+//				break;
+//		}
+//	}
+//	return(acc);
+//}
 
 
 /*___________________________________________________________________________
@@ -2075,20 +2075,20 @@ Word40 L40_shr(Word40 acc, int16_t var1)
  |___________________________________________________________________________|
 */
 
-Word40 L40_negate(Word40 acc)
-{
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//Word40 L40_negate(Word40 acc)
+//{
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	acc = -acc;
+//	acc = -acc;
 
-	if (acc > MAX_40){
-		acc = MAX_40;
-	}
-	return(acc);
-}
+//	if (acc > MAX_40){
+//		acc = MAX_40;
+//	}
+//	return(acc);
+//}
 
 /*___________________________________________________________________________
  |                                                                           |
@@ -2121,10 +2121,10 @@ int16_t norm32(Word40 acc)
 {
 	int16_t	var1;
 
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
 	var1 = 0;
 
@@ -2174,25 +2174,25 @@ int16_t norm32(Word40 acc)
  |___________________________________________________________________________|
 */
 
-int32_t L_sat32(Word40 acc)
-{
-	int32_t	L_var_out;
+//int32_t L_sat32(Word40 acc)
+//{
+//	int32_t	L_var_out;
 
 
-	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
-		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
-		exit(0);
-	}
+//	if ((acc > MAX_40) || (acc < MIN_40) || (acc != floor(acc))){
+//		fprintf(stderr, "BASIC_OP: Error in 40 bits format.\n");
+//		exit(0);
+//	}
 
-	if (acc > (Word40) MAX_32){
-		acc = (Word40) MAX_32;
-	}
-	if (acc < (Word40) MIN_32){
-		acc = (Word40) MIN_32;
-	}
-	L_var_out = (int32_t) acc;
-	return(L_var_out);
-}
+//	if (acc > (Word40) MAX_32){
+//		acc = (Word40) MAX_32;
+//	}
+//	if (acc < (Word40) MIN_32){
+//		acc = (Word40) MIN_32;
+//	}
+//	L_var_out = (int32_t) acc;
+//	return(L_var_out);
+//}
 
 
 #if OVERFLOW_CHECK
