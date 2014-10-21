@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E9A3FD9B-B3E2-4058-B33F-B1B9784211BB}</ProjectGuid>
+    <RootNamespace>MELPe_lib</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <TargetExt>.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\coeff.h" />
+    <ClInclude Include="..\..\constant.h" />
+    <ClInclude Include="..\..\cprv.h" />
+    <ClInclude Include="..\..\dsp_sub.h" />
+    <ClInclude Include="..\..\fec_code.h" />
+    <ClInclude Include="..\..\fft_lib.h" />
+    <ClInclude Include="..\..\fsvq_cb.h" />
+    <ClInclude Include="..\..\fs_lib.h" />
+    <ClInclude Include="..\..\global.h" />
+    <ClInclude Include="..\..\lpc_lib.h" />
+    <ClInclude Include="..\..\macro.h" />
+    <ClInclude Include="..\..\mathdp31.h" />
+    <ClInclude Include="..\..\mathhalf.h" />
+    <ClInclude Include="..\..\math_lib.h" />
+    <ClInclude Include="..\..\mat_lib.h" />
+    <ClInclude Include="..\..\melp_sub.h" />
+    <ClInclude Include="..\..\msvq_cb.h" />
+    <ClInclude Include="..\..\npp.h" />
+    <ClInclude Include="..\..\pitch.h" />
+    <ClInclude Include="..\..\pit_lib.h" />
+    <ClInclude Include="..\..\postfilt.h" />
+    <ClInclude Include="..\..\qnt12.h" />
+    <ClInclude Include="..\..\qnt12_cb.h" />
+    <ClInclude Include="..\..\sc1200.h" />
+    <ClInclude Include="..\..\transcode.h" />
+    <ClInclude Include="..\..\vq_lib.h" />
+    <ClInclude Include="..\VS2010\harm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\classify.c" />
+    <ClCompile Include="..\..\coeff.c" />
+    <ClCompile Include="..\..\dsp_sub.c" />
+    <ClCompile Include="..\..\fec_code.c" />
+    <ClCompile Include="..\..\fft_lib.c" />
+    <ClCompile Include="..\..\fsvq_cb.c" />
+    <ClCompile Include="..\..\fs_lib.c" />
+    <ClCompile Include="..\..\global.c" />
+    <ClCompile Include="..\..\harm.c" />
+    <ClCompile Include="..\..\lpc_lib.c" />
+    <ClCompile Include="..\..\mathdp31.c" />
+    <ClCompile Include="..\..\mathhalf.c" />
+    <ClCompile Include="..\..\math_lib.c" />
+    <ClCompile Include="..\..\mat_lib.c" />
+    <ClCompile Include="..\..\melp_ana.c" />
+    <ClCompile Include="..\..\melp_chn.c" />
+    <ClCompile Include="..\..\melp_sub.c" />
+    <ClCompile Include="..\..\melp_syn.c" />
+    <ClCompile Include="..\..\msvq_cb.c" />
+    <ClCompile Include="..\..\npp.c" />
+    <ClCompile Include="..\..\pitch.c" />
+    <ClCompile Include="..\..\pit_lib.c" />
+    <ClCompile Include="..\..\postfilt.c" />
+    <ClCompile Include="..\..\qnt12.c" />
+    <ClCompile Include="..\..\qnt12_cb.c" />
+    <ClCompile Include="..\..\transcode.c" />
+    <ClCompile Include="..\..\vq_lib.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
