@@ -14,6 +14,8 @@
         <TargetCommonOption>
           <Device>STM32F401RE</Device>
           <Vendor>STMicroelectronics</Vendor>
+          <PackID>Keil.STM32F4xx_DFP.2.3.0</PackID>
+          <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IROM(0x08000000,0x60000) IRAM(0x20000000,0x18000) CPUTYPE("Cortex-M4") FPU2 CLOCK(84000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -72,6 +74,8 @@
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
             <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
@@ -128,6 +132,7 @@
             <RestoreFunctions>1</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <LimitSpeedToRealTime>0</LimitSpeedToRealTime>
+            <RestoreSysVw>1</RestoreSysVw>
           </Simulator>
           <Target>
             <UseTarget>0</UseTarget>
@@ -139,8 +144,7 @@
             <RestoreFunctions>0</RestoreFunctions>
             <RestoreToolbox>1</RestoreToolbox>
             <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreTracepoints>1</RestoreTracepoints>
-            <RestoreTracepoints>1</RestoreTracepoints>
+            <RestoreSysVw>1</RestoreSysVw>
           </Target>
           <RunDebugAfterBuild>0</RunDebugAfterBuild>
           <TargetSelection>0</TargetSelection>
@@ -361,7 +365,7 @@
               <MiscControls></MiscControls>
               <Define>__DBG_ITM</Define>
               <Undefine></Undefine>
-              <IncludePath>C:\Keil5.0\ARM\RV31\INC;..\..\..\melpe_fxp_src</IncludePath>
+              <IncludePath>C:\Keil5.0\ARM\RV31\INC;..\..\..\melpe_fxp</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -543,33 +547,9 @@
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
-          <Files>
-            <File>
-              <FileName>arm_cortexM4lf_math.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>C:\Keil5.0\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Lib\ARM\arm_cortexM4lf_math.lib</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>::Device</GroupName>
-          <Files>
-            <File>
-              <FileName>RTE_Device.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>RTE\Device\STM32F401RE\RTE_Device.h</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32f401xx.s</FileName>
-              <FileType>2</FileType>
-              <FilePath>RTE\Device\STM32F401RE\startup_stm32f401xx.s</FilePath>
-            </File>
-            <File>
-              <FileName>system_stm32f4xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>RTE\Device\STM32F401RE\system_stm32f4xx.c</FilePath>
-            </File>
-          </Files>
         </Group>
       </Groups>
     </Target>
@@ -590,8 +570,8 @@
           <targetInfo name="MELPE"/>
         </targetInfos>
       </component>
-      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.3.0" condition="STM32F4xx CMSIS Device">
-        <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="1.0.6"/>
+      <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.1.0" condition="STM32F4 CMSIS">
+        <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="2.2.0"/>
         <targetInfos>
           <targetInfo name="MELPE"/>
         </targetInfos>
@@ -599,25 +579,29 @@
     </components>
     <files>
       <file attr="config" category="header" name="RTE_Driver\Config\RTE_Device.h" version="1.0.0">
-        <instance index="0">RTE\Device\STM32F401RE\RTE_Device.h</instance>
+        <instance index="0" removed="1">RTE\Device\STM32F401RE\RTE_Device.h</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.3.0" condition="STM32F4xx CMSIS Device"/>
         <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="1.0.6"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" condition="STM32F401xE_ARMCC" name="Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f401xe.s" version="2.1.0">
+        <instance index="0">RTE\Device\STM32F401RE\startup_stm32f401xe.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.1.0" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="2.2.0"/>
         <targetInfos>
           <targetInfo name="MELPE"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" condition="STM32F401" name="Device\Source\ARM\startup_stm32f401xx.s" version="1.0.0">
-        <instance index="0">RTE\Device\STM32F401RE\startup_stm32f401xx.s</instance>
+        <instance index="0" removed="1">RTE\Device\STM32F401RE\startup_stm32f401xx.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.3.0" condition="STM32F4xx CMSIS Device"/>
         <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="1.0.6"/>
-        <targetInfos>
-          <targetInfo name="MELPE"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
-      <file attr="config" category="source" name="Device\Source\system_stm32f4xx.c" version="1.0.0">
+      <file attr="config" category="source" name="MDK\Device\Source\ARM\system_stm32f4xx.c" version="2.1.0">
         <instance index="0">RTE\Device\STM32F401RE\system_stm32f4xx.c</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="1.3.0" condition="STM32F4xx CMSIS Device"/>
-        <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="1.0.6"/>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="Keil" Cversion="2.1.0" condition="STM32F4 CMSIS"/>
+        <package name="STM32F4xx_DFP" schemaVersion="1.2" url="http://www.keil.com/pack" vendor="Keil" version="2.2.0"/>
         <targetInfos>
           <targetInfo name="MELPE"/>
         </targetInfos>
